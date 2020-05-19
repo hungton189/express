@@ -1,0 +1,20 @@
+extends ../layouts/common.pug
+block content
+	
+	h1 User	
+	.d-flex.align-item-center
+		a.btn.btn-primary(href="/userlist/create") New
+		form.ml-auto.mb-2(action = "/userlist/search" class = "d-flex")
+			input(type = text, name = "q" value = valuee)
+			button.btn.btn-primary.ml-2 search
+	table.table
+		tr
+			th Name
+			th Phone
+			th Action
+		each user in users
+			tr
+				td=user.name
+				td=user.phone
+				td
+					a.btn.btn-light(href = "/userlist/" + user.id) view

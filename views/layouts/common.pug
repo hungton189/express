@@ -1,0 +1,15 @@
+html
+	head
+		link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+		link(rel="stylesheet", href="style/Styleindex.css")
+	body
+		nav.navbar.navbar-expand-lg.navbar-light.bg-light
+			a.navbar-brand(href='/') Coders.Tokyo
+			#navbarSupportedContent.collapse.navbar-collapse
+				ul.navbar-nav.mr-auto
+					li.nav-item.active
+						a.nav-link(href='/') Home
+					li.nav-item.active
+						a.nav-link(href='/userlist') Users
+	.container.pt-5
+		block content
