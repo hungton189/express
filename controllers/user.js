@@ -42,26 +42,11 @@ module.exports.view = function(req,res)
 
 module.exports.postCreate = function(req,res)
 	{
-		var errors = [];
-		if(!req.body.name)
-		{
-			errors.push("Vui lòng nhập tên!");
-		}
-		if(!req.body.phone)
-		{
-			errors.push("Vui lòng nhập SĐT!");
-		}
-		if(errors.length > 0) res.render("users/create",
-			{
-				errors: errors,
-				values: req.body
-			});
-		else
-		{
+		console.log(res.locals.success);
+		
 			req.body.id = shortId.generate();
 			db.get('users')
 	  		.push(req.body)
 	  		.write()
 			res.redirect("/userlist");
-		}
 	};
