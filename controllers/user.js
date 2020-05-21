@@ -41,9 +41,7 @@ module.exports.view = function(req,res)
 	};
 
 module.exports.postCreate = function(req,res)
-	{
-		console.log(res.locals.success);
-		
+	{	
 			req.body.id = shortId.generate();
 			db.get('users')
 	  		.push(req.body)
