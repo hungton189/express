@@ -1,3 +1,5 @@
+var md5 = require("md5");
+
 var db = require("../db.js");
 module.exports.login = function(req,res)
 	{
@@ -18,7 +20,9 @@ module.exports.postLogin = function(req,res)
 				});
 			return;
 		}
-		if(req.body.password !== user.password)
+		var password = md5(req.body.password);
+		console.log(password);
+		if(password !== user.password)
 		{
 			error.push("Password sai!");
 			res.render("auth/login.pug",
