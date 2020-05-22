@@ -21,7 +21,6 @@ module.exports.postLogin = function(req,res)
 			return;
 		}
 		var password = md5(req.body.password);
-		console.log(password);
 		if(password !== user.password)
 		{
 			error.push("Password sai!");
@@ -32,6 +31,9 @@ module.exports.postLogin = function(req,res)
 				});
 			return;
 		}
-		res.cookie("user",user.id);
+		res.cookie("userId",user.id,
+			{
+				signed: true
+			});
 		res.redirect("/userlist");
 	}
