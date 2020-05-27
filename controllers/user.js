@@ -43,6 +43,7 @@ module.exports.view = function(req,res)
 module.exports.postCreate = function(req,res)
 	{	
 			req.body.id = shortId.generate();
+			req.body.avatar = req.file.path.slice(7);
 			db.get('users')
 	  		.push(req.body)
 	  		.write()
