@@ -2,7 +2,7 @@ var express = require('express');
 var multer  = require('multer');
 
 var router = express.Router();
-var controller = require("../controllers/user.js");
+var controller = require("../controllers/userController.js");
 router.use(express.static('public'));
 var postCreateUser = require("../validate/createUserValidate");
 

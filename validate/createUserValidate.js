@@ -1,4 +1,5 @@
-module.exports.createUserValidate = function(req,res, next)
+var User = require("../models/userModel.js")
+module.exports.createUserValidate =async function(req,res, next)
 {
 	var errors = [];
 		if(!req.body.name)
@@ -8,6 +9,19 @@ module.exports.createUserValidate = function(req,res, next)
 		if(!req.body.phone)
 		{
 			errors.push("Vui lòng nhập SĐT!");
+		}
+		if(!req.body.email)
+		{
+			errors.push("Vui lòng nhập Email!");
+		}
+		var data =await User.findOne({email:req.body.email});
+		if(data)
+		{
+			errors.push("Email đã tồn tại trong hệ thống!");
+		}
+		if(!req.body.password)
+		{
+			errors.push("Vui lòng nhập Password!");
 		}
 		if(errors.length > 0)
 		{ 	

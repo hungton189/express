@@ -1,17 +1,18 @@
 var shortId = require("shortid");
-var db = require("../db.js");
-module.exports.index = function(req,res)
+var User = require("../models/userModel.js");
+module.exports.index = async function(req,res)
 	{
+		var users = await User.find();
 		res.render("users/index",
 			{
-				users: db.get("users").value()
+				users: users
 			});
 	};
 
-module.exports.search = function(req, res)
+module.exports.search = async function(req, res)
 	{
 		var q = req.query.q;
-		var users = db.get("users").value();
+		var users = await User.find();
 		var mathchedUsers = users.filter(function(user)
 			{
 				return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
@@ -28,24 +29,21 @@ module.exports.create = function(req,res)
 		res.render("users/create");
 	};
 
-module.exports.view = function(req,res)
+module.exports.view =async function(req,res)
 	{
 		var id = req.params.id;
-		var user = db.get('users')
-		  .find({ id: id })
-		  .value();
+		var user = await User.findById(id);
 		 res.render("users/view",
 		 	{
 		 		user:user
 		 	});
 	};
 
-module.exports.postCreate = function(req,res)
-	{	
-			req.body.id = shortId.generate();
-			req.body.avatar = req.file.path.slice(7);
-			db.get('users')
-	  		.push(req.body)
-	  		.write()
+module.exports.postCreate =async function(req,res)
+	{
+			var user = req.body;	
+			user.avatar = req.file.path.slice(7);
+			const doc = await User.create(user);
+			await doc.save();
 			res.redirect("/userlist");
 	};

@@ -8,11 +8,17 @@ block content
 	form(action = "/userlist/create" method = "POST" enctype="multipart/form-data")
 		.form-group
 			label(for="name") Name: 
-			input#name.form-control(name = "name" value="")
+			input#name.form-control(name = "name" value=values?values.name:"")
 		.form-group
 			label(for="phone") Phone: 
 			input#phone.form-control(name = "phone" value=values?values.phone:"")
 		.form-group
+			label(for="email") Email: 
+			input#email.form-control(name = "email" value=values?values.email:"")
+		.form-group
+			label(for="password") Password: 
+			input#password.form-control(name= "password" type="password" value=values?values.password:"") 
+		.form-group
 			label(for="avatar") Avatar: 
-			input#avatar.form-control-file(name = "avatar" type = "file")
+			input#avatar.form-control-file(name = "avatar" type = "file" value=values?values.avatar:"")
 		button.btn.btn-primary Create

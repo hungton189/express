@@ -4,8 +4,9 @@ var express = require('express');
 var app = express();
 var port = 3000;
 var cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
 
-var userRoute = require("./routes/user.js");
+var userRoute = require("./routes/userRoute.js");
 var authRoute = require("./routes/authRoute.js");
 var authMiddleware = require("./middleware/authMiddleware.js");
 var productRoute = require("./routes/productRoute.js");
@@ -19,6 +20,7 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionId);
+mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true}); //connect mongodb
 
 app.use(express.static('public'));
 
